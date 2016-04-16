@@ -9,6 +9,7 @@ include $(THEOS)/makefiles/common.mk
 
 LIBRARY_NAME = libkarenprefs
 libkarenprefs_FILES = $(wildcard *.m)
+libkarenprefs_FRAMEWORKS = UIKit
 libkarenprefs_LIBRARIES = prefs
 libkarenprefs_LDFLAGS = -F$(SYSROOT)/System/Library/PrivateFrameworks -weak_framework Preferences
 
