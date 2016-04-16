@@ -121,7 +121,7 @@ This is a `KarenPrefsCustomTextColorButtonCell` subclass that changes the text c
 
 ##### `KarenPrefsBounceBackSwitchCell`
 
-Tested to work on iOS 7/8/9. Does not "bounce back" on iOS 6, but has no adverse effects otherwise. If you're supporting iOS 5, you must add `-F$(SYSROOT)/System/Library/PrivateFrameworks -weak_framework Preferences` to your `TweakName_LDFLAGS` Makefile variable to avoid a crash.
+Tested to work on iOS 6/7/8/9. If you're supporting iOS 5, you must add `-F$(SYSROOT)/System/Library/PrivateFrameworks -weak_framework Preferences` to your `TweakName_LDFLAGS` Makefile variable to avoid a crash.
 
 This is a `PSSwitchTableCell` subclass that is in a perpetual "on" state. When tapped, the switch will animate itself "bouncing back" to the on state.
 
