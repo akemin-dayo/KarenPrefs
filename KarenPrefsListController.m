@@ -47,7 +47,7 @@
 	NSMutableArray *plistSpecifiers = [[super loadSpecifiersFromPlistName:plistName target:target] mutableCopy];
 	NSMutableArray *sakujo = [[NSMutableArray alloc] init];
 	for (PSSpecifier *currentSpecifier in plistSpecifiers) {
-		if (![PSSpecifier environmentPassesPreferenceLoaderFilter:currentSpecifier.properties[PLFilterKey]]) {
+		if (![PSSpecifier environmentPassesPreferenceLoaderFilter:[currentSpecifier.properties objectForKey:PLFilterKey]]) {
 			[sakujo addObject:currentSpecifier];
 		}
 	}
