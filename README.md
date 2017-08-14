@@ -14,7 +14,7 @@ cd KarenPrefs/
 make setup
 ```
 
-1. In your project's `Makefile`, add `karenlocalizer` to your `TweakName_LIBRARIES` variable.
+1. In your project's `Makefile`, add `karenprefs` to your `TweakName_LIBRARIES` variable.
 
 1. In your project's `control` file, add `net.angelxwind.karenprefs` to the `Depends:` field.
 
