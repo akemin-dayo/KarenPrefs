@@ -1,9 +1,10 @@
 #import <Preferences/PSListController.h>
-
-@interface PSListController (KarenPrefsListController)
--(void) loadView;
--(void) viewDidDisappear:(BOOL)animated;
-@end
+#import <Preferences/PSSpecifier.h>
+#import <Preferences/PSSwitchTableCell.h>
+#import <libprefs/prefs.h>
+#import <UIKit/UIKit.h>
+#import <version.h>
+#include <spawn.h>
 
 @interface KarenPrefsListController : PSListController
 -(NSString *) karenPrefsLoadFromPlist;
@@ -13,7 +14,9 @@
 -(NSString *) karenPrefsSiteURL;
 -(NSString *) karenPrefsDeviantArtUsername;
 -(NSString *) karenPrefsNavbarIconLoadFromImage;
+-(UIColor *) karenPrefsCustomTintColor;
 -(BOOL) karenPrefsShouldBypassCfprefsd;
+-(BOOL) karenPrefsIsRootBundle;
 -(void) respring;
 -(void) openTwitter;
 -(void) openSite;

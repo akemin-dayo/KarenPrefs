@@ -6,13 +6,13 @@ I originally wrote KarenPrefs back in 2013 for use with my tweak [mikoto](https:
 
 KarenPrefs is BSD-licensed. See `LICENSE` for more information.
 
-### KarenPrefs setup and usage (assuming you already have [Theos](https://github.com/theos/theos))
+### KarenPrefs setup and usage (assuming you already have the latest version of [Theos](https://github.com/theos/theos))
 
-1. `git clone https://github.com/angelXwind/KarenPrefs.git`
-
-1. `cd KarenPrefs/`
-
-1. `make install-to-theos`
+```
+git clone https://github.com/angelXwind/KarenPrefs.git
+cd KarenPrefs/
+make setup
+```
 
 1. In your project's `Makefile`, add `karenlocalizer` to your `TweakName_LIBRARIES` variable.
 
@@ -22,7 +22,7 @@ KarenPrefs is BSD-licensed. See `LICENSE` for more information.
 
 ##### `KarenPrefsListController`
 
-Tested to work on iOS 5/6/7/8/9.
+Tested to work on iOS 5/6/7/8/9/10.
 
 This is a `PSListController` subclass that basically carries the weight of KarenPrefs' functionality.
 
@@ -60,75 +60,96 @@ Here is a description of its extra "convenience" methods (I use these for the "C
 
 1. `-(NSString *) karenPrefsDeviantArtUsername` — Override this method and return a deviantArt username that you want to open using `-(void) openDeviantArt`.
 
-1. ``-(void) openDeviantArt` — When called, opens the deviantArt username defined in `-(NSString *) karenPrefsDeviantArtUsername` in the official deviantArt app. If the deviantArt app is not installed, then it will open deviantArt's web UI instead. Does nothing if `-(NSString *) karenPrefsDeviantArtUsername` is `nil`.
+1. `-(void) openDeviantArt` — When called, opens the deviantArt username defined in `-(NSString *) karenPrefsDeviantArtUsername` in the official deviantArt app. If the deviantArt app is not installed, then it will open deviantArt's web UI instead. Does nothing if `-(NSString *) karenPrefsDeviantArtUsername` is `nil`.
 
+1. `-(UIColor *) karenPrefsCustomTintColor` — Override this method and return an `UIColor` to change the tint color of your preference pane. However, please make note of an important implementation detail described in `-(BOOL) karenPrefsIsRootBundle`. **Defaults to `nil` if not set.**
+
+1. `-(BOOL) karenPrefsIsRootBundle` — Override this method and return `0` to signify to KarenPrefs that the bundle that the `KarenPrefsListController` is located in is *not* the root bundle. A "root bundle" is one where if you tap Back, you will end up back at the main list of PreferenceLoader preference panes. This is important for `-(UIColor *) karenPrefsCustomTintColor` as it relies on the value returned by this method to determine whether or not to reset the tint color. **Defaults to `1` if not set.**
 
 ##### `KarenPrefsBannerCell`
 
-Tested to work on iOS 5/6/7/8/9.
+Tested to work on iOS 5/6/7/8/9/10.
 
 This is a `PSTableCell` subclass that sets an image as its own background.
 
 Override `-(NSString *) karenPrefsBannerLoadFromImage` in your subclass's implementation to specify the filename of the image in your preference bundle that will be used as a banner.
 
-The height can be modified via your specifier plist by adding the `height` key/value pair. (Example: `<key>height</key><integer>205</integer>`)
+The height can be modified via your specifier plist by adding the `height` key/value pair in your property list. (Example: `<key>height</key><integer>205</integer>`)
 
 ##### `KarenPrefsAnimatedExitToSpringBoard`
 
-Tested to work on iOS 5/6/7/8/9.
+Tested to work on iOS 5/6/7/8/9/10.
 
 This adds the `-(void) animatedExit` method to `UIApplication` which when called, will gracefully close the Preferences app with the native iOS "closed app" animation, then terminate the process.
 
 ##### `KarenPrefsCustomTextColorButtonCell`
 
-Tested to work on iOS 5/6/7/8/9.
+Tested to work on iOS 5/6/7/8/9/10.
 
-This is a `PSTableCell` subclass that changes the text color to any `UIColor *`.
+This is a `PSTableCell` subclass that has a configurable text color.
 
 Override `-(UIColor *) karenPrefsCustomTextColor` in your subclass's implementation to specify the text color of the cell.
 
-Some pre-made subclasses are already included with KarenPrefs (`KarenPrefsBlackTextButtonCell`, `KarenPrefsRedTextButtonCell`, `KarenPrefsGreenTextButtonCell`, `KarenPrefsPurpleTextButtonCell`).
-
 ##### `KarenPrefsBlackTextButtonCell`
 
-Tested to work on iOS 5/6/7/8/9. Unnecessary if exclusively targeting iOS 5 and 6.
+Tested to work on iOS 5/6/7/8/9/10. Unnecessary if exclusively targeting iOS 5 and 6.
 
 This is a `KarenPrefsCustomTextColorButtonCell` subclass that changes the text color to black.
 
-I wrote this because iOS 7 and above use a blue text color in their `PSButtonCell` implementations, and I wanted a black one for mikoto's `PSButtonCell` buttons.
+Useful if you want a `PSButtonCell` on iOS 7 and above with black text instead of the default blue.
 
 ##### `KarenPrefsRedTextButtonCell`
 
-Tested to work on iOS 5/6/7/8/9.
+Tested to work on iOS 5/6/7/8/9/10.
 
 This is a `KarenPrefsCustomTextColorButtonCell` subclass that changes the text color to red.
 
-Useful for making scary-looking "Reset Settings" buttons.
+Useful for buttons that perform destructive operations (such as "Reset Settings" buttons).
 
 ##### `KarenPrefsGreenTextButtonCell`
 
-Tested to work on iOS 5/6/7/8/9.
+Tested to work on iOS 5/6/7/8/9/10.
 
 This is a `KarenPrefsCustomTextColorButtonCell` subclass that changes the text color to green.
 
-I use this for my "Donate Using PayPal" buttons.
+Useful for donation buttons.
 
 ##### `KarenPrefsPurpleTextButtonCell`
 
-Tested to work on iOS 5/6/7/8/9.
+Tested to work on iOS 5/6/7/8/9/10.
 
 This is a `KarenPrefsCustomTextColorButtonCell` subclass that changes the text color to purple.
 
+##### `KarenPrefsCustomColorSwitchCell`
+
+Tested to work on iOS 6/7/8/9/10. **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is also not entirely stable.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~
+
+This is a `PSSwitchCell` subclass that has a configurable switch color.
+
+Override `-(UIColor *) karenPrefsCustomSwitchColor` in your subclass's implementation to specify the color to set the switch to.
+
 ##### `KarenPrefsBounceBackSwitchCell`
 
-Tested to work on iOS 6/7/8/9. If you're supporting iOS 5, you must add `-F$(SYSROOT)/System/Library/PrivateFrameworks -weak_framework Preferences` to your `TweakName_LDFLAGS` Makefile variable to avoid a crash.
+Tested to work on iOS 6/7/8/9/10. **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is also not entirely stable.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~
+
+Note that while this does *not* work on iOS 5, if the preference pane you are using this in also supports iOS 5, you must add `-F$(SYSROOT)/System/Library/PrivateFrameworks -weak_framework Preferences` to your `TweakName_LDFLAGS` Makefile variable to avoid a crash.
 
 This is a `PSSwitchTableCell` subclass that is in a perpetual "on" state. When tapped, the switch will animate itself "bouncing back" to the on state.
 
-I wrote this for [mikoto](https://cydia.angelxwind.net/?page/net.angelxwind.mikoto), where it's used for two options ("OTA Software Update Disabler" and "Reset All Disabler") that are intentionally not disableable by design.
+In order for this to function properly, you must override `-(NSString *) karenPrefsBounceBackObserverName` with the name of an `NSNotificationCenter` observer. The way this works is that when the observer is called, the switch will be set to the "on" state.
+
+Useful for communicating to users that there are options that cannot be disabled and are always enabled.
+
+##### `KarenPrefsCustomColorBounceBackSwitchCell`
+
+Tested to work on iOS 6/7/8/9/10. **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is also not entirely stable.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~
+
+This is a `KarenPrefsBounceBackSwitchCell` subclass that has a configurable switch color.
+
+Override `-(UIColor *) karenPrefsCustomSwitchColor` in your subclass's implementation to specify the color to set the switch to.
 
 ##### `KarenPrefsEditableTextCellWithReturn`
 
-Tested to work on iOS 5/6/7/8/9.
+Tested to work on iOS 5/6/7/8/9/10.
 
 This is a `PSEditableTableCell` subclass that just sets `-textFieldShouldReturn:textfield` to `1`. For more information on what `-(BOOL) textFieldShouldReturn:(UITextField *)textField` controls, consult [Apple's official documentation](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITextFieldDelegate_Protocol/#//apple_ref/occ/intfm/UITextFieldDelegate/textFieldShouldReturn:).

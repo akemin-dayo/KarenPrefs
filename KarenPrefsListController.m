@@ -1,14 +1,4 @@
 #import "KarenPrefsListController.h"
-#import <Preferences/PSSpecifier.h>
-#import <Preferences/PSSwitchTableCell.h>
-#import <libprefs/prefs.h>
-#import <UIKit/UIKit.h>
-
-#include <spawn.h>
-
-#ifndef kCFCoreFoundationVersionNumber_IOS_6_0
-#define kCFCoreFoundationVersionNumber_IOS_6_0 793.00
-#endif
 
 @implementation KarenPrefsListController
 -(NSString *) karenPrefsLoadFromPlist {
@@ -39,7 +29,15 @@
 	return nil;
 }
 
+-(UIColor *) karenPrefsCustomTintColor {
+	return nil;
+}
+
 -(BOOL) karenPrefsShouldBypassCfprefsd {
+	return 1;
+}
+
+-(BOOL) karenPrefsIsRootBundle {
 	return 1;
 }
 
@@ -92,11 +90,50 @@
 	if ([self karenPrefsNavbarIconLoadFromImage]) {
 		[self.navigationItem setTitleView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:[self karenPrefsNavbarIconLoadFromImage] inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]]];
 	}
+	if ([self karenPrefsCustomTintColor]) {
+		UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+		if (!window) {
+			window = [[[UIApplication sharedApplication] windows] firstObject];
+		}
+		if ([window respondsToSelector:@selector(setTintColor:)]) {
+			[window setTintColor:[self karenPrefsCustomTintColor]];
+		}
+	}
 }
+
+-(void) _unloadBundleControllers {
+	[super _unloadBundleControllers];
+	if ([self karenPrefsCustomTintColor] && [self karenPrefsIsRootBundle]) {
+		UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+		if (!window) {
+			window = [[[UIApplication sharedApplication] windows] firstObject];
+		}
+		if ([window respondsToSelector:@selector(setTintColor:)]) {
+			[window setTintColor:nil];
+		}
+	}
+}
+
+/*
+// For some bizarre reason, some preference bundles (like the one I wrote for AirSpeaker) don't call -_unloadBundleControllers!?
+// This is a workaround for those strange edge cases.
+-(void) viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+	if ([self karenPrefsCustomTintColor] && [self karenPrefsIsRootBundle]) {
+		UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+		if (!window) {
+			window = [[[UIApplication sharedApplication] windows] firstObject];
+		}
+		if ([window respondsToSelector:@selector(setTintColor:)]) {
+			[window setTintColor:nil];
+		}
+	}
+}
+*/
 
 -(void) respring {
 	pid_t respringPid;
-	char *respringArgv[] = {"/usr/bin/killall", (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_IOS_6_0) ? "backboardd" : "SpringBoard", NULL};
+	char *respringArgv[] = {"/usr/bin/killall", (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_6_0) ? "backboardd" : "SpringBoard", NULL};
 	posix_spawn(&respringPid, respringArgv[0], NULL, NULL, respringArgv, NULL);
 	waitpid(respringPid, NULL, WEXITED);
 }
@@ -130,7 +167,7 @@
 		if ([[UIApplication sharedApplication] canOpenURL:cydiaURL]) {
 			[[UIApplication sharedApplication] openURL:cydiaURL];
 		} else {
-			UIAlertView *cydiaNotInstalled = [[UIAlertView alloc] initWithTitle:@"Cydia/APT Repo URL"
+			UIAlertView *cydiaNotInstalled = [[UIAlertView alloc] initWithTitle:@"Cydia/APT Repository URL"
 				message:[self karenPrefsRepoURL]
 				delegate:self
 				cancelButtonTitle:@"OK"

@@ -15,9 +15,9 @@ libkarenprefs_LDFLAGS = -F$(SYSROOT)/System/Library/PrivateFrameworks -weak_fram
 
 include $(THEOS_MAKE_PATH)/library.mk
 
-install-to-theos:: all
+setup:: all
 	@cp -v .theos/$(THEOS_OBJ_DIR_NAME)/libkarenprefs.dylib $(THEOS)/lib/
-	@mkdir -pv $(THEOS)/include/KarenPrefs/
+	@mkdir -p $(THEOS)/include/KarenPrefs/
 	@cp -v *.h $(THEOS)/include/KarenPrefs/
 
 after-install::

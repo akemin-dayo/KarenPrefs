@@ -1,6 +1,6 @@
 #import <Preferences/PSSwitchTableCell.h>
+#import <version.h>
 
 @interface KarenPrefsBounceBackSwitchCell : PSSwitchTableCell
--(void) layoutSubviews;
--(void) setOn;
+-(NSString *) karenPrefsBounceBackObserverName;
 @end

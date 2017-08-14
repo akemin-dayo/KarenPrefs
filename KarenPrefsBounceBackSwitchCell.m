@@ -4,11 +4,14 @@
 -(void) layoutSubviews {
 	[super layoutSubviews];
 	[((UISwitch *)[self control]) setOn:1 animated:1];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setOn) name:@"resetAllAlert" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setOn) name:@"OTAAlert" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setOn) name:[self karenPrefsBounceBackObserverName] object:nil];
+}
+
+-(NSString *) karenPrefsBounceBackObserverName {
+	return nil;
 }
 
 -(void) setOn {
-   [((UISwitch *)[self control]) setOn:1 animated:1];
+	[((UISwitch *)[self control]) setOn:1 animated:1];
 }
 @end
