@@ -114,9 +114,10 @@
 	}
 }
 
-/*
 // For some bizarre reason, some preference bundles (like the one I wrote for AirSpeaker) don't call -_unloadBundleControllers!?
 // This is a workaround for those strange edge cases.
+// However, the current (commented-out) implementation has a bug where it will reset the tint color if you transition (via say, a `PSLinkCell`) to any other view.
+/*
 -(void) viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
 	if ([self karenPrefsCustomTintColor] && [self karenPrefsIsRootBundle]) {
