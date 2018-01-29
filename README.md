@@ -32,11 +32,11 @@ That aside, I also added a few additional methods.
 
 Here is a description of its basic methods:
 
-1. `-(NSString *) karenPrefsLoadFromPlist` — Override this method and return the filename (without `.plist` extension) of your desired plist that you want to load specifiers from. **Defaults to `nil` if not set.** This is the only thing you really need to override if you only desire basic functionality (with use of PreferenceLoader filters, etc.) from KarenPrefs.
+1. `-(NSString *) karenPrefsLoadFromPlist` — Override this method and return the filename (_without_ `.plist` extension) of your desired plist that you want to load specifiers from. **Defaults to `nil` if not set.** This is the only thing you really need to override if you only desire basic functionality (with use of PreferenceLoader filters, etc.) from KarenPrefs.
 
 1. `-(BOOL) shouldBypassCfprefsd` — If this is overriden to return `1`, KarenPrefs will read and write directly from your `plist` file, bypassing `cfprefsd`. Use this if you're loading your tweak's preferences directly from your `plist` on iOS 8+. If you use `cfprefsd` in your tweak, set this value to `0`. **Defaults to `1` if not set.**
 
-1. `-(NSString *) karenPrefsNavbarIconLoadFromImage` — Override this method and return the filename (without `.png` extension) of your desired PNG image that you want to display in the navigation bar. Defaults to `nil` if not set.
+1. `-(NSString *) karenPrefsNavbarIconLoadFromImage` — Override this method and return the filename (_without_ `.png` extension) of your desired PNG image that you want to display in the navigation bar. Defaults to `nil` if not set.
 
 1. `-(void) respring` — When called, resprings the device intelligently (kills `backboardd` if running on iOS 6 and above, kills `SpringBoard` if running on iOS 5 and below).
 
@@ -54,7 +54,7 @@ Here is a description of its extra "convenience" methods (I use these for the "C
 
 1. `-(void) openRepo` — When called, opens the Cydia/APT repo URL defined in `-(NSString *) karenPrefsRepoURL` in the Cydia. If Cydia is not installed (...for whatever reason), then it will display the repo URL in an `UIAlertView`. Does nothing if `-(NSString *) karenPrefsRepoURL` is `nil`.
 
-1. `-(NSString *) karenPrefsTwitterUsername` — Override this method and return a Twitter username (without the `@` username prefix) that you want to open using `-(void) openTwitter`.
+1. `-(NSString *) karenPrefsTwitterUsername` — Override this method and return a Twitter username (_without_ the `@` username prefix) that you want to open using `-(void) openTwitter`.
 
 1. `-(void) openTwitter` — When called, opens the Twitter username defined in `-(NSString *) karenPrefsTwitterUsername` in the official Twitter app. If the Twitter app is not installed, then it will open Twitter's web UI instead. Does nothing if `-(NSString *) karenPrefsTwitterUsername` is `nil`.
 
@@ -62,7 +62,7 @@ Here is a description of its extra "convenience" methods (I use these for the "C
 
 1. `-(void) openDeviantArt` — When called, opens the deviantArt username defined in `-(NSString *) karenPrefsDeviantArtUsername` in the official deviantArt app. If the deviantArt app is not installed, then it will open deviantArt's web UI instead. Does nothing if `-(NSString *) karenPrefsDeviantArtUsername` is `nil`.
 
-1. `-(UIColor *) karenPrefsCustomTintColor` — **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is NOT stable and subject to change.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~ Override this method and return an `UIColor` to change the tint color of your preference pane. **Defaults to `nil` if not set.**
+1. `-(UIColor *) karenPrefsCustomTintColor` — Requires KarenPrefs version 1.2 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.2)`) Override this method and return an `UIColor` to change the tint color of your preference pane. **Defaults to `nil` if not set.**
 
 ##### `KarenPrefsBannerCell`
 
@@ -120,7 +120,7 @@ This is a `KarenPrefsCustomTextColorButtonCell` subclass that changes the text c
 
 ##### `KarenPrefsCustomColorSwitchCell`
 
-Tested to work on iOS 6/7/8/9/10. **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is NOT stable and subject to change.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~
+Tested to work on iOS 6/7/8/9/10. Requires KarenPrefs version 1.2 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)
 
 This is a `PSSwitchCell` subclass that has a configurable switch color.
 
@@ -128,7 +128,7 @@ Override `-(UIColor *) karenPrefsCustomSwitchColor` in your subclass's implement
 
 ##### `KarenPrefsBounceBackSwitchCell`
 
-Tested to work on iOS 6/7/8/9/10. **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is NOT stable and subject to change.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~
+Tested to work on iOS 6/7/8/9/10. Requires KarenPrefs version 1.2 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)
 
 Note that while this does *not* work on iOS 5, if the preference pane you are using this in also supports iOS 5, you must add `-F$(SYSROOT)/System/Library/PrivateFrameworks -weak_framework Preferences` to your `TweakName_LDFLAGS` Makefile variable to avoid a crash.
 
@@ -140,7 +140,7 @@ Useful for communicating to users that there are options that cannot be disabled
 
 ##### `KarenPrefsCustomColorBounceBackSwitchCell`
 
-Tested to work on iOS 6/7/8/9/10. **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is NOT stable and subject to change.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~
+Tested to work on iOS 6/7/8/9/10. Requires KarenPrefs version 1.2 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)
 
 This is a `KarenPrefsBounceBackSwitchCell` subclass that has a configurable switch color.
 
