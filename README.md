@@ -62,9 +62,7 @@ Here is a description of its extra "convenience" methods (I use these for the "C
 
 1. `-(void) openDeviantArt` — When called, opens the deviantArt username defined in `-(NSString *) karenPrefsDeviantArtUsername` in the official deviantArt app. If the deviantArt app is not installed, then it will open deviantArt's web UI instead. Does nothing if `-(NSString *) karenPrefsDeviantArtUsername` is `nil`.
 
-1. `-(UIColor *) karenPrefsCustomTintColor` — **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is also not entirely stable.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~ Override this method and return an `UIColor` to change the tint color of your preference pane. However, please make note of an important implementation detail described in `-(BOOL) karenPrefsIsRootBundle`. **Defaults to `nil` if not set.**
-
-1. `-(BOOL) karenPrefsIsRootBundle` — **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is also not entirely stable.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~ Override this method and return `0` to signify to KarenPrefs that the bundle that the `KarenPrefsListController` is located in is *not* the root bundle. A "root bundle" is one where if you tap Back, you will end up back at the main list of PreferenceLoader preference panes. This is important for `-(UIColor *) karenPrefsCustomTintColor` as it relies on the value returned by this method to determine whether or not to reset the tint color. **Defaults to `1` if not set.**
+1. `-(UIColor *) karenPrefsCustomTintColor` — **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is NOT stable and subject to change.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~ Override this method and return an `UIColor` to change the tint color of your preference pane. **Defaults to `nil` if not set.**
 
 ##### `KarenPrefsBannerCell`
 
@@ -122,7 +120,7 @@ This is a `KarenPrefsCustomTextColorButtonCell` subclass that changes the text c
 
 ##### `KarenPrefsCustomColorSwitchCell`
 
-Tested to work on iOS 6/7/8/9/10. **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is also not entirely stable.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~
+Tested to work on iOS 6/7/8/9/10. **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is NOT stable and subject to change.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~
 
 This is a `PSSwitchCell` subclass that has a configurable switch color.
 
@@ -130,7 +128,7 @@ Override `-(UIColor *) karenPrefsCustomSwitchColor` in your subclass's implement
 
 ##### `KarenPrefsBounceBackSwitchCell`
 
-Tested to work on iOS 6/7/8/9/10. **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is also not entirely stable.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~
+Tested to work on iOS 6/7/8/9/10. **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is NOT stable and subject to change.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~
 
 Note that while this does *not* work on iOS 5, if the preference pane you are using this in also supports iOS 5, you must add `-F$(SYSROOT)/System/Library/PrivateFrameworks -weak_framework Preferences` to your `TweakName_LDFLAGS` Makefile variable to avoid a crash.
 
@@ -142,7 +140,7 @@ Useful for communicating to users that there are options that cannot be disabled
 
 ##### `KarenPrefsCustomColorBounceBackSwitchCell`
 
-Tested to work on iOS 6/7/8/9/10. **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is also not entirely stable.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~
+Tested to work on iOS 6/7/8/9/10. **Do not use this feature in your code just yet. KarenPrefs 1.2 is *not* released yet as of this writing. As such, the API is NOT stable and subject to change.** ~~Available as of KarenPrefs version 1.2. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)~~
 
 This is a `KarenPrefsBounceBackSwitchCell` subclass that has a configurable switch color.
 

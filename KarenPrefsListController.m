@@ -37,10 +37,6 @@
 	return 1;
 }
 
--(BOOL) karenPrefsIsRootBundle {
-	return 1;
-}
-
 -(NSArray *) loadSpecifiersFromPlistName:(NSString *)plistName target:(PSListController *)target {
 	NSMutableArray *plistSpecifiers = [[super loadSpecifiersFromPlistName:plistName target:target] mutableCopy];
 	NSMutableArray *sakujo = [[NSMutableArray alloc] init];
@@ -90,6 +86,10 @@
 	if ([self karenPrefsNavbarIconLoadFromImage]) {
 		[self.navigationItem setTitleView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:[self karenPrefsNavbarIconLoadFromImage] inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]]];
 	}
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
 	if ([self karenPrefsCustomTintColor]) {
 		UIWindow *window = [[UIApplication sharedApplication] keyWindow];
 		if (!window) {
@@ -101,9 +101,9 @@
 	}
 }
 
--(void) _unloadBundleControllers {
-	[super _unloadBundleControllers];
-	if ([self karenPrefsCustomTintColor] && [self karenPrefsIsRootBundle]) {
+-(void) viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	if ([self karenPrefsCustomTintColor]) {
 		UIWindow *window = [[UIApplication sharedApplication] keyWindow];
 		if (!window) {
 			window = [[[UIApplication sharedApplication] windows] firstObject];
@@ -113,24 +113,6 @@
 		}
 	}
 }
-
-// For some bizarre reason, some preference bundles (like the one I wrote for AirSpeaker) don't call -_unloadBundleControllers!?
-// This is a workaround for those strange edge cases.
-// However, the current (commented-out) implementation has a bug where it will reset the tint color if you transition (via say, a `PSLinkCell`) to any other view.
-/*
--(void) viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-	if ([self karenPrefsCustomTintColor] && [self karenPrefsIsRootBundle]) {
-		UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-		if (!window) {
-			window = [[[UIApplication sharedApplication] windows] firstObject];
-		}
-		if ([window respondsToSelector:@selector(setTintColor:)]) {
-			[window setTintColor:nil];
-		}
-	}
-}
-*/
 
 -(void) respring {
 	pid_t respringPid;

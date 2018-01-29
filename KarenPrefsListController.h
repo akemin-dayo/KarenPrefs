@@ -16,7 +16,6 @@
 -(NSString *) karenPrefsNavbarIconLoadFromImage;
 -(UIColor *) karenPrefsCustomTintColor;
 -(BOOL) karenPrefsShouldBypassCfprefsd;
--(BOOL) karenPrefsIsRootBundle;
 -(void) respring;
 -(void) openTwitter;
 -(void) openSite;
