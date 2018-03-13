@@ -6,6 +6,6 @@ Architecture: iphoneos-arm
 Description: A development library that provides various conveniences and enhancements for developers seeking to write preference bundles for their tweaks.
 Homepage: https://cydia.angelxwind.net/
 Depiction: https://cydia.angelxwind.net/?page/net.angelxwind.karenprefs
-Maintainer: Karen／明美 (angelXwind) <angelXwind@angelxwind.net>
-Author: Karen／明美 (angelXwind) <angelXwind@angelxwind.net>
+Maintainer: Karen／明美 (angelXwind) <karen@angelxwind.net>
+Author: Karen／明美 (angelXwind) <karen@angelxwind.net>
 Section: Development
