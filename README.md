@@ -70,7 +70,19 @@ Tested to work on iOS 5/6/7/8/9/10/11.
 
 This is a `PSTableCell` subclass that sets an image as its own background.
 
-Override `-(NSString *) karenPrefsBannerLoadFromImage` in your subclass's implementation to specify the filename of the image in your preference bundle that will be used as a banner.
+Override `-(NSString *) karenPrefsBannerLoadFromImage` in your subclass's implementation to specify the filename of the **PNG** image (**without the extension!**) in your preference bundle that will be used as a banner.
+
+In order to support the entire range of displays, you must have the following variations present in your bundle:
+
+* **Non-Retina Display (iPhone 3GS, etc.):** `exampleBanner.png`
+
+* **Retina Display (iPhone 4, 5, etc.):** `exampleBanner@2x.png`
+
+* **4.7-inch Retina HD (iPhone 6, etc.):** `exampleBanner-667h@2x.png`
+
+* **5.5-inch Retina HD (iPhone 6 Plus, etc.):** `exampleBanner@3x.png`
+
+* **Super Retina HD Display (iPhone X):** `exampleBanner-812h@3x.png`
 
 The height can be modified via your specifier plist by adding the `height` key/value pair in your property list. (Example: `<key>height</key><integer>205</integer>`)
 

@@ -9,7 +9,15 @@
 	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
 	if (self) {
 		if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_8_0) {
-			[self addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:[self karenPrefsBannerLoadFromImage] inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]]];
+			UIImage *bannerImage = [UIImage imageNamed:[self karenPrefsBannerLoadFromImage] inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+			NSString *suffix = @"";
+			if ([UIScreen mainScreen].bounds.size.height == 667.0) {
+				suffix = @"-667h";
+			} else if ([UIScreen mainScreen].bounds.size.height == 812.0) {
+				suffix = @"-812h";
+			}
+			bannerImage = [UIImage imageNamed:[[self karenPrefsBannerLoadFromImage] stringByAppendingString:suffix] inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] ?: bannerImage;
+			[self addSubview:[[UIImageView alloc] initWithImage:bannerImage]];
 		} else {
 			[self addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:[self karenPrefsBannerLoadFromImage] inBundle:[NSBundle bundleForClass:self.class]]]];
 		}
