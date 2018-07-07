@@ -66,6 +66,14 @@ Here is a description of its extra "convenience" methods (I use these for the "C
 
 1. `-(void) openGitHub` — When called, opens the GitHub username defined in `-(NSString *) karenPrefsGitHubUsername` in the system's default browser. Does nothing if `-(NSString *) karenPrefsGitHubUsername` is `nil`.
 
+1. `-(NSString *) karenPrefsPixivID` — Override this method and return a Pixiv ID that you want to open using `-(void) openPixiv`.
+
+1. `-(void) openPixiv` — When called, opens the Pixiv ID defined in `-(NSString *) karenPrefsPixivID` in the system's default browser. Does nothing if `-(NSString *) karenPrefsPixivID` is `nil`.
+
+1. `-(NSString *) karenPrefsTumblrUsername` — Override this method and return a Tumblr username that you want to open using `-(void) openTumblr`.
+
+1. `-(void) openTumblr` — When called, opens the Tumblr username defined in `-(NSString *) karenPrefsTumblrUsername` in the official Tumblr app. If the Tumblr app is not installed, then it will open Tumblr's web UI in the system's default browser instead. Does nothing if `-(NSString *) karenPrefsTumblrUsername` is `nil`.
+
 1. `-(UIColor *) karenPrefsCustomTintColor` — Requires KarenPrefs version 1.2 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.2)`) Override this method and return an `UIColor` to change the tint color of your preference pane. **Defaults to `nil` if not set.**
 
 ##### `KarenPrefsBannerCell`

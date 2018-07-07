@@ -13,6 +13,14 @@
 	return nil;
 }
 
+-(NSString *) karenPrefsPixivID {
+	return nil;
+}
+
+-(NSString *) karenPrefsTumblrUsername {
+	return nil;
+}
+
 -(NSString *) karenPrefsDonateURL {
 	return nil;
 }
@@ -178,6 +186,25 @@
 -(void) openGitHub {
 	if ([self karenPrefsGitHubUsername]) {
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/%@", [self karenPrefsGitHubUsername]]]];
+	}
+}
+
+-(void) openPixiv {
+	if ([self karenPrefsPixivID]) {
+		// TODO: pixiv's iOS app exposes a pixiv:// URL scheme, but I don't understand enough about it to implement here in KarenPrefs
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://pixiv.net/member.php?id=%@", [self karenPrefsPixivID]]]];
+	}
+}
+
+-(void) openTumblr {
+	if ([self karenPrefsTumblrUsername]) {
+		NSURL *tumblrURL = [NSURL URLWithString:[NSString stringWithFormat:@"tumblr://x-callback-url/blog?blogName=%@", [self karenPrefsTumblrUsername]]];
+		if ([[UIApplication sharedApplication] canOpenURL:tumblrURL]) {
+			[[UIApplication sharedApplication] openURL:tumblrURL];
+		} else {
+			// NOTE: Tumblr blogs using custom URLs (and non-HTTPS blogs) will be automatically redirected, so it's fine to do this
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@.tumblr.com/", [self karenPrefsTumblrUsername]]]];
+		}
 	}
 }
 @end
