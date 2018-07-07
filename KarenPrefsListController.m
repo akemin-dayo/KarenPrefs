@@ -9,6 +9,10 @@
 	return nil;
 }
 
+-(NSString *) karenPrefsGitHubUsername {
+	return nil;
+}
+
 -(NSString *) karenPrefsDonateURL {
 	return nil;
 }
@@ -168,6 +172,12 @@
 		} else {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@.deviantart.com/", [self karenPrefsDeviantArtUsername]]]];
 		}
+	}
+}
+
+-(void) openGitHub {
+	if ([self karenPrefsGitHubUsername]) {
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/%@", [self karenPrefsGitHubUsername]]]];
 	}
 }
 @end

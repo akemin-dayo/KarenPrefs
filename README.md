@@ -56,11 +56,15 @@ Here is a description of its extra "convenience" methods (I use these for the "C
 
 1. `-(NSString *) karenPrefsTwitterUsername` — Override this method and return a Twitter username (_without_ the `@` username prefix) that you want to open using `-(void) openTwitter`.
 
-1. `-(void) openTwitter` — When called, opens the Twitter username defined in `-(NSString *) karenPrefsTwitterUsername` in the official Twitter app. If the Twitter app is not installed, then it will open Twitter's web UI instead. Does nothing if `-(NSString *) karenPrefsTwitterUsername` is `nil`.
+1. `-(void) openTwitter` — When called, opens the Twitter username defined in `-(NSString *) karenPrefsTwitterUsername` in the official Twitter app. If the Twitter app is not installed, then it will open Twitter's web UI in the system's default browser instead. Does nothing if `-(NSString *) karenPrefsTwitterUsername` is `nil`.
 
 1. `-(NSString *) karenPrefsDeviantArtUsername` — Override this method and return a deviantArt username that you want to open using `-(void) openDeviantArt`.
 
-1. `-(void) openDeviantArt` — When called, opens the deviantArt username defined in `-(NSString *) karenPrefsDeviantArtUsername` in the official deviantArt app. If the deviantArt app is not installed, then it will open deviantArt's web UI instead. Does nothing if `-(NSString *) karenPrefsDeviantArtUsername` is `nil`.
+1. `-(void) openDeviantArt` — When called, opens the deviantArt username defined in `-(NSString *) karenPrefsDeviantArtUsername` in the official deviantArt app. If the deviantArt app is not installed, then it will open deviantArt's web UI in the system's default browser instead. Does nothing if `-(NSString *) karenPrefsDeviantArtUsername` is `nil`.
+
+1. `-(NSString *) karenPrefsGitHubUsername` — Override this method and return a GitHub username that you want to open using `-(void) openGitHub`.
+
+1. `-(void) openGitHub` — When called, opens the GitHub username defined in `-(NSString *) karenPrefsGitHubUsername` in the system's default browser. Does nothing if `-(NSString *) karenPrefsGitHubUsername` is `nil`.
 
 1. `-(UIColor *) karenPrefsCustomTintColor` — Requires KarenPrefs version 1.2 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.2)`) Override this method and return an `UIColor` to change the tint color of your preference pane. **Defaults to `nil` if not set.**
 
