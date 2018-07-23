@@ -1,7 +1,7 @@
 Package: net.angelxwind.karenprefs
 Name: KarenPrefs
 Depends: preferenceloader
-Version: 1.3.1
+Version: 1.3.2
 Architecture: iphoneos-arm
 Description: A development library that provides various conveniences and enhancements for developers seeking to write preference bundles for their tweaks.
 Homepage: https://cydia.angelxwind.net/
