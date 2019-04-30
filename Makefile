@@ -1,12 +1,12 @@
 TARGET =: clang::5.0
-ARCHS = armv7 armv7s arm64
+ARCHS = armv7 armv7s arm64 arm64e
 DEBUG = 0
 GO_EASY_ON_ME = 1
 
 THEOS_PACKAGE_DIR_NAME = debs
 PACKAGE_VERSION = $(THEOS_PACKAGE_BASE_VERSION)
 include $(THEOS)/makefiles/common.mk
-
+SYSROOT = $(THEOS)/sdks/iPhoneOS10.3.sdk
 LIBRARY_NAME = libkarenprefs
 libkarenprefs_FILES = $(wildcard *.m)
 libkarenprefs_FRAMEWORKS = UIKit
