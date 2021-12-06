@@ -22,6 +22,12 @@ make setup
 
 ## The various components of KarenPrefs
 
+### IMPORTANT NOTE — PLEASE READ
+
+For features that list the warning "**Requires KarenPrefs version [VERSION_HERE] or higher**", _please_ make sure to include `Depends: net.angelxwind.karenprefs (>= VERSION_HERE)` in your `control` file, or else a subset of your users on outdated KarenPrefs versions will experience preference pane crashes due to missing symbols!
+
+---
+
 ### KarenPrefsListController
 #### Tested to work on iOS 14, 13, 12, 11, 10, 9, 8, 7, 6, and 5.
 
@@ -59,23 +65,23 @@ Here is a description of its extra "convenience" methods (I use these for the "C
 
 1. `-(void) openTwitter` — When called, opens the Twitter username defined in `-(NSString *) karenPrefsTwitterUsername` in the official Twitter app. If the Twitter app is not installed, then it will open Twitter's web UI in the system's default browser instead. Does nothing if `-(NSString *) karenPrefsTwitterUsername` is `nil`.
 
-1. `-(NSString *) karenPrefsDeviantArtUsername` — **Requires KarenPrefs version 1.3 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.3)`)** Override this method and return a deviantArt username that you want to open using `-(void) openDeviantArt`.
+1. `-(NSString *) karenPrefsDeviantArtUsername` — **Requires KarenPrefs version 1.3 or higher.** Override this method and return a deviantArt username that you want to open using `-(void) openDeviantArt`.
 
-1. `-(void) openDeviantArt` — **Requires KarenPrefs version 1.3 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.3)`) When called, opens** the deviantArt username defined in `-(NSString *) karenPrefsDeviantArtUsername` in the official deviantArt app. If the deviantArt app is not installed, then it will open deviantArt's web UI in the system's default browser instead. Does nothing if `-(NSString *) karenPrefsDeviantArtUsername` is `nil`.
+1. `-(void) openDeviantArt` — **Requires KarenPrefs version 1.3 or higher.** When called, opens the deviantArt username defined in `-(NSString *) karenPrefsDeviantArtUsername` in the official deviantArt app. If the deviantArt app is not installed, then it will open deviantArt's web UI in the system's default browser instead. Does nothing if `-(NSString *) karenPrefsDeviantArtUsername` is `nil`.
 
-1. `-(NSString *) karenPrefsGitHubUsername` — **Requires KarenPrefs version 1.3 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.3)`)** Override this method and return a GitHub username that you want to open using `-(void) openGitHub`.
+1. `-(NSString *) karenPrefsGitHubUsername` — **Requires KarenPrefs version 1.3 or higher.** Override this method and return a GitHub username that you want to open using `-(void) openGitHub`.
 
-1. `-(void) openGitHub` — **Requires KarenPrefs version 1.3 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.3)`) When called, opens the** GitHub username defined in `-(NSString *) karenPrefsGitHubUsername` in the system's default browser. Does nothing if `-(NSString *) karenPrefsGitHubUsername` is `nil`.
+1. `-(void) openGitHub` — **Requires KarenPrefs version 1.3 or higher.** When called, opens the GitHub username defined in `-(NSString *) karenPrefsGitHubUsername` in the system's default browser. Does nothing if `-(NSString *) karenPrefsGitHubUsername` is `nil`.
 
-1. `-(NSString *) karenPrefsPixivID` — **Requires KarenPrefs version 1.3 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.3)`) Override** this method and return a Pixiv ID that you want to open using `-(void) openPixiv`.
+1. `-(NSString *) karenPrefsPixivID` — **Requires KarenPrefs version 1.3 or higher.** Override this method and return a Pixiv ID that you want to open using `-(void) openPixiv`.
 
 1. `-(void) openPixiv` — When called, opens the Pixiv ID defined in `-(NSString *) karenPrefsPixivID` in the system's default browser. Does nothing if `-(NSString *) karenPrefsPixivID` is `nil`.
 
-1. `-(NSString *) karenPrefsTumblrUsername` — **Requires KarenPrefs version 1.3 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.3)`)** Override this method and return a Tumblr username that you want to open using `-(void) openTumblr`.
+1. `-(NSString *) karenPrefsTumblrUsername` — **Requires KarenPrefs version 1.3 or higher.** Override this method and return a Tumblr username that you want to open using `-(void) openTumblr`.
 
-1. `-(void) openTumblr` — **Requires KarenPrefs version 1.3 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.3)`) When called, opens the** Tumblr username defined in `-(NSString *) karenPrefsTumblrUsername` in the official Tumblr app. If the Tumblr app is not installed, then it will open Tumblr's web UI in the system's default browser instead. Does nothing if `-(NSString *) karenPrefsTumblrUsername` is `nil`.
+1. `-(void) openTumblr` — **Requires KarenPrefs version 1.3 or higher.** When called, opens the Tumblr username defined in `-(NSString *) karenPrefsTumblrUsername` in the official Tumblr app. If the Tumblr app is not installed, then it will open Tumblr's web UI in the system's default browser instead. Does nothing if `-(NSString *) karenPrefsTumblrUsername` is `nil`.
 
-1. `-(UIColor *) karenPrefsCustomTintColor` — **Requires KarenPrefs version 1.2 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)** Override this method and return an `UIColor` to change the tint color of your preference pane. **Defaults to `nil` if not set.**
+1. `-(UIColor *) karenPrefsCustomTintColor` — **Requires KarenPrefs version 1.2 or higher.** Override this method and return an `UIColor` to change the tint color of your preference pane. **Defaults to `nil` if not set.**
 
 ---
 
@@ -153,7 +159,7 @@ This is a `KarenPrefsCustomTextColorButtonCell` subclass that changes the text c
 ---
 
 ### KarenPrefsCustomColorSwitchCell
-#### Tested to work on iOS 14, 13, 12, 11, 10, 9, 8, 7, 6. Requires KarenPrefs version 1.2 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)
+#### Tested to work on iOS 14, 13, 12, 11, 10, 9, 8, 7, 6. Requires KarenPrefs version 1.2 or higher.
 
 This is a `PSSwitchCell` subclass that has a configurable switch color.
 
@@ -162,7 +168,7 @@ Override `-(UIColor *) karenPrefsCustomSwitchColor` in your subclass's implement
 ---
 
 ### KarenPrefsCustomColorListItemsController
-#### Tested to work on iOS 14, 13, 12, 11, 10, 9, 8, and 7. Requires KarenPrefs version 1.4 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.4)`)
+#### Tested to work on iOS 14, 13, 12, 11, 10, 9, 8, and 7. Requires KarenPrefs version 1.4 or higher.
 
 This is a `PSListItemsController` subclass that has a configurable tint color.
 
@@ -171,7 +177,7 @@ Override `-(UIColor *) karenPrefsCustomTintColor` in your subclass's implementat
 ---
 
 ### KarenPrefsBounceBackSwitchCell
-#### Tested to work on iOS 14, 13, 12, 11, 10, 9, 8, 7, and 6. Requires KarenPrefs version 1.2 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)
+#### Tested to work on iOS 14, 13, 12, 11, 10, 9, 8, 7, and 6. Requires KarenPrefs version 1.2 or higher.
 
 Note that while this does *not* work on iOS 5, if the preference pane you are using this in also supports iOS 5, you must add `-F$(SYSROOT)/System/Library/PrivateFrameworks -weak_framework Preferences` to your `TweakName_LDFLAGS` Makefile variable to avoid a crash.
 
@@ -184,7 +190,7 @@ Useful for communicating to users that there are options that cannot be disabled
 ---
 
 ### KarenPrefsCustomColorBounceBackSwitchCell
-#### Tested to work on iOS 14, 13, 12, 11, 10, 9, 8, 7, and 6. Requires KarenPrefs version 1.2 or higher. (`Depends: net.angelxwind.karenprefs (>= 1.2)`)
+#### Tested to work on iOS 14, 13, 12, 11, 10, 9, 8, 7, and 6. Requires KarenPrefs version 1.2 or higher.
 
 This is a `KarenPrefsBounceBackSwitchCell` subclass that has a configurable switch color.
 
